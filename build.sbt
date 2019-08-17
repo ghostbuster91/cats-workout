@@ -8,7 +8,7 @@ name := "cats-workout"
 
 version := "0.1"
 
-scalaVersion := "2.12.7"
+scalaVersion := "2.12.8"
 
 lazy val rootProject = (project in file("."))
   .settings(commonSettings: _*)
@@ -21,5 +21,6 @@ lazy val chapter1: Project = (project in file("chapter1"))
     name := "chapter1",
     libraryDependencies ++= Seq(
       compilerPlugin("com.softwaremill.neme" %% "neme-plugin" % "0.0.2"),
+      "org.typelevel" %% "cats-core" % "1.0.0"
     )
   )
