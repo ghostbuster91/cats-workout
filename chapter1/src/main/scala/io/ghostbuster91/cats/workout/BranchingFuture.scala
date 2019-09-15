@@ -17,11 +17,11 @@ object BranchingFuture {
 object TreeSyntax {
 
   implicit class TreeOpts[T](t: Tree[T]) {
-    def map[TT](f: T => TT)(implicit m: Monad[Tree]): Tree[TT] = {
+    def map[TT](f: T => TT)(implicit m: MyMonad[Tree]): Tree[TT] = {
       m.map(t)(f)
     }
 
-    def flatMap[TT](f: T => Tree[TT])(implicit m: Monad[Tree]): Tree[TT] = {
+    def flatMap[TT](f: T => Tree[TT])(implicit m: MyMonad[Tree]): Tree[TT] = {
       m.flatMap(t)(f)
     }
   }
@@ -29,7 +29,7 @@ object TreeSyntax {
 }
 
 object TreeImplicits {
-  implicit val mTree: Monad[Tree] = new Monad[Tree] {
+  implicit val mTree: MyMonad[Tree] = new MyMonad[Tree] {
     override def pure[A](a: A): Tree[A] = Tree.leaf(a)
 
     override def flatMap[A, B](value: Tree[A])(func: A => Tree[B]): Tree[B] = {
